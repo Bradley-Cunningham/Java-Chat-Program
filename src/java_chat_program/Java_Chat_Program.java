@@ -15,7 +15,8 @@ public class Java_Chat_Program {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        ChatGui chat = new ChatGui();
+        chat.setVisible(true);
     }
     
 }
