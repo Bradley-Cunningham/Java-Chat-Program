@@ -32,7 +32,7 @@ public class ChatGui extends javax.swing.JFrame {
         chatHistory = new javax.swing.JTextArea();
         sendTextField = new javax.swing.JTextField();
         jToggleButton1 = new javax.swing.JToggleButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        menuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuSettings = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -41,6 +41,11 @@ public class ChatGui extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         sendButton.setText("Send");
+        sendButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendButtonActionPerformed(evt);
+            }
+        });
 
         chatHistory.setColumns(20);
         chatHistory.setRows(5);
@@ -62,9 +67,9 @@ public class ChatGui extends javax.swing.JFrame {
         menuExit.setText("Exit");
         jMenu1.add(menuExit);
 
-        jMenuBar1.add(jMenu1);
+        menuBar.add(jMenu1);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -105,6 +110,10 @@ public class ChatGui extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_menuSettingsActionPerformed
 
+    private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
+        
+    }//GEN-LAST:event_sendButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -143,10 +152,10 @@ public class ChatGui extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea chatHistory;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuExit;
     private javax.swing.JMenuItem menuSettings;
     private javax.swing.JButton sendButton;
