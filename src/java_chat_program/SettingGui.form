@@ -31,7 +31,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jButton1" min="-2" pref="70" max="-2" attributes="0"/>
+                  <Component id="doneButton" min="-2" pref="70" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="nameLabel" max="32767" attributes="0"/>
@@ -42,11 +42,6 @@
                           <Component id="ipLabel" max="32767" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="ipText" min="-2" pref="181" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="portLabel" min="-2" pref="52" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="portText" min="-2" pref="181" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -64,41 +59,31 @@
                   <Component id="ipLabel" max="32767" attributes="0"/>
                   <Component id="ipText" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="portText" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="portLabel" alignment="3" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="nameLabel" alignment="3" max="32767" attributes="0"/>
                   <Component id="nameText" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" pref="38" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+              <Component id="doneButton" min="-2" pref="38" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="doneButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Done"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="doneButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="ipText">
       <Properties>
         <Property name="text" type="java.lang.String" value="127.0.0.1"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="portText">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="8777"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="portTextActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="nameText">
       <Properties>
@@ -108,11 +93,6 @@
     <Component class="javax.swing.JLabel" name="ipLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="IP Address"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="portLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Port"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="nameLabel">
