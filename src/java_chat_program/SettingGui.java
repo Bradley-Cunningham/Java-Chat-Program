@@ -158,10 +158,6 @@ public class SettingGui extends javax.swing.JFrame {
     {
         return ipText.getText();
     }
-    public String getPort()
-    {
-        return portText.getText();
-    }
     public String getConnectName()
     {
         return nameText.getText();
