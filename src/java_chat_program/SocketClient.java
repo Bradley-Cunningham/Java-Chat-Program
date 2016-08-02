@@ -10,8 +10,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -20,15 +18,13 @@ import java.util.logging.Logger;
 public class SocketClient extends Thread {
     
     private String ip;
-    private int port;
     private String name;
     private String message;
-    
-    public SocketClient(String message , String ip, int port, String name)
+   
+    public SocketClient(String message ,String ip ,String name )
     {
         this.message = message;
         this.ip = ip;
-        this.port = port;
         this.name = name;
     }
     
@@ -37,8 +33,9 @@ public class SocketClient extends Thread {
         try {
             Socket socket = null;
             PrintWriter out = null;
+            System.out.println("Getting Ready");
             try {
-                socket = new Socket(ip,port);
+                socket = new Socket(ip,1521);
                 out = new PrintWriter(socket.getOutputStream(), true);
                 System.out.println("Client Connected and ready to send");
             }   catch (IOException ex) {
@@ -48,6 +45,7 @@ public class SocketClient extends Thread {
             //Send message
             out.print(name + ": " + message + "\n");
             out.flush();
+
            //Close Socket Client
             out.close();
             socket.close();
