@@ -8,7 +8,6 @@ package java_chat_program;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -23,7 +22,6 @@ public class SocketServer extends Thread{
         this.gui = gui;
     }
 
-    
      @Override
      public void run() {
         while(!this.isInterrupted()){
@@ -35,17 +33,11 @@ public class SocketServer extends Thread{
             Socket clientSocket = null;
             clientSocket = serverSocket.accept();
             System.out.println("Socket setup");
-            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             //------------------------------------------------------------------
             String textFromClient = in.readLine(); // read the text from client
             gui.newText(textFromClient);
             //------------------------------------------------------------------
-            out.print("Msg Recieved"); // send the response to client
-            //------------------------------------------------------------------
-            //------------------------------------------------------------------
-            out.flush();
-            out.close();
             in.close();
             clientSocket.close();
             serverSocket.close();
