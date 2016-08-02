@@ -5,6 +5,8 @@
  */
 package java_chat_program;
 
+import javax.swing.event.ChangeEvent;
+
 /**
  *
  * @author Bradley
@@ -37,6 +39,9 @@ public class ChatGui extends javax.swing.JFrame {
         chatHistory = new javax.swing.JTextArea();
         sendTextField = new javax.swing.JTextField();
         connectButton = new javax.swing.JToggleButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuSettings = new javax.swing.JMenuItem();
@@ -62,6 +67,12 @@ public class ChatGui extends javax.swing.JFrame {
                 connectButtonActionPerformed(evt);
             }
         });
+
+        jLabel1.setText("Edit IP at file/settings");
+
+        jLabel2.setText("Edit Name at file/settings");
+
+        jLabel3.setText("Click Connect to start");
 
         jMenu1.setText("File");
 
@@ -94,9 +105,12 @@ public class ChatGui extends javax.swing.JFrame {
                         .addComponent(sendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(connectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(connectButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -105,7 +119,14 @@ public class ChatGui extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(connectButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(connectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sendButton, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
@@ -121,23 +142,25 @@ public class ChatGui extends javax.swing.JFrame {
     }//GEN-LAST:event_menuSettingsActionPerformed
 
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
-        client = new SocketClient( sendTextField.getText(), setting.getIP(), setting.getConnectName());
+        this.chatHistory.append("\nMe: " + this.sendTextField.getText());
+        client = new SocketClient( this.sendTextField.getText(), setting.getIP(), setting.getConnectName());
         client.start();
+        this.sendTextField.setText("");
     }//GEN-LAST:event_sendButtonActionPerformed
 
     private void connectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectButtonActionPerformed
-        if(connectButton.getName().equals("Connect")){
+        if(connectButton.getText().equals("Disconnect")){
+            server.interrupt();
+            connectButton.setText("Connect");
+            chatHistory.append("\n------End chat------");
+        }  else {  
             server = new SocketServer(this);
             server.start();
-            connectButton.setName("Disconnect");
-        }
-        else
-        {
-            server.interrupt();
-            connectButton.setName("Connect");
+            chatHistory.append("\n------New chat------");
+            connectButton.setText("Disconnect");
         }
     }//GEN-LAST:event_connectButtonActionPerformed
-    
+  
     public void newText(String text){
         this.chatHistory.append("\n"+ text);
     }
@@ -180,6 +203,9 @@ public class ChatGui extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea chatHistory;
     private javax.swing.JToggleButton connectButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
