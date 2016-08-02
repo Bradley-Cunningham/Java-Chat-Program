@@ -10,6 +10,11 @@ package java_chat_program;
  * @author Bradley
  */
 public class ChatGui extends javax.swing.JFrame {
+    private String connectIP;
+    private String connectName;
+    private SocketServer server;
+    private SocketClient client;
+    SettingGui setting = new SettingGui();
 
     /**
      * Creates new form ChatGui
@@ -31,7 +36,7 @@ public class ChatGui extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         chatHistory = new javax.swing.JTextArea();
         sendTextField = new javax.swing.JTextField();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        connectButton = new javax.swing.JToggleButton();
         menuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuSettings = new javax.swing.JMenuItem();
@@ -51,7 +56,12 @@ public class ChatGui extends javax.swing.JFrame {
         chatHistory.setRows(5);
         jScrollPane1.setViewportView(chatHistory);
 
-        jToggleButton1.setText("Connect");
+        connectButton.setText("Connect");
+        connectButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                connectButtonActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("File");
 
@@ -85,7 +95,7 @@ public class ChatGui extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(connectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -95,7 +105,7 @@ public class ChatGui extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton1))
+                    .addComponent(connectButton))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sendButton, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
@@ -107,12 +117,30 @@ public class ChatGui extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSettingsActionPerformed
-        // TODO add your handling code here:
+        setting.setVisible(true);
     }//GEN-LAST:event_menuSettingsActionPerformed
 
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
-        
+        client = new SocketClient( sendTextField.getText(), setting.getIP(), setting.getConnectName());
+        client.start();
     }//GEN-LAST:event_sendButtonActionPerformed
+
+    private void connectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectButtonActionPerformed
+        if(connectButton.getName().equals("Connect")){
+            server = new SocketServer(this);
+            server.start();
+            connectButton.setName("Disconnect");
+        }
+        else
+        {
+            server.interrupt();
+            connectButton.setName("Connect");
+        }
+    }//GEN-LAST:event_connectButtonActionPerformed
+    
+    public void newText(String text){
+        this.chatHistory.append("\n"+ text);
+    }
 
     /**
      * @param args the command line arguments
@@ -151,10 +179,10 @@ public class ChatGui extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea chatHistory;
+    private javax.swing.JToggleButton connectButton;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuExit;
     private javax.swing.JMenuItem menuSettings;
